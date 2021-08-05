@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style type="text/css">
+  body{
+  align-items: center;
+}
+h1{
+  text-transform: uppercase ; font-size: 20px; color: rgb(0, 0, 0);
+}
+
+button {
+  width: 15%; height: 60px; border-radius: 50px;
+  background: linear-gradientlinear-(60deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  text-transform: uppercase ; font-size: 15px; color: rgb(0, 0, 0);
+  background-size: 400%; position: relative;
+}
+
+button::before {
+  content:""; position: absolute; left:-5px;
+  top: -5px; bottom: -5px; right: -5px;
+  background: linear-gradient(60deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  z-index: -1; border-radius: 40px;filter: blur(20px);
+  background-size: 400%;
+}
+button:hover::before {
+  animation: hello 8s infinite;
+}
+button:hover {
+  animation: hello 8s infinite;
+  cursor: pointer;
+}
+@keyframes hello {
+  100%{
+      background-position: -400% 0;
+  }
+}
+  
+  
+  </style>
+
+</head>
+<body>
+<iframe name="frame" id="frame" style="display: none;"></iframe>
+
+<center>
+
+<form action="final.php" method="post" target="frame">
+<br><br>
+<h2>لوحة تحكم تحريك القاعدة</h2>
+
+<br><br><br>
+
+<div>
+  <button  type="submit" value="up"  id="forward" name="forward" required>
+  <span id="demo"></span>forward </button>
+</div>
+
+<br>
+
+  
+  <button type="submit"  value="Left"  id="Left" name="left" required>
+  <span id="demo2"></span>Left </button> &nbsp; 
+
+
+
+<button type="submit"  value="stop"  id="Stop" name="stop" required>
+  <span id="demo3"></span>Stop </button> &nbsp; 
+
+ &nbsp;
+
+
+<button type="submit"  value="right"  id="Right" name="right" required>
+  <span id="demo4"></span>Right </button>
+
+
+<br><br>
+<button type="submit"  value="down"  id="backward" name="backward" required>
+  <span id="demo5"></span>down </button>
+
+<br><br><br><br><br><br><br><br>
+</form>
+<table>
+  <tr>
+<form action="result.php" method="post" >
+<button type="submit" value="Submit">  Save </button>
+</form>
+&nbsp;&nbsp;</tr>
+<tr>
+&nbsp;
+<form name="formArm" method="post" action="final.php">
+<button type="submit" value="Submit">  Run </button>
+</form>
+</tr>
+</table>
+</center>
+<script>
+  window.watsonAssistantChatOptions = {
+      integrationID: "e613bf28-3039-445e-b07b-b21c88a03b0c", // The ID of this integration.
+      region: "eu-de", // The region your integration is hosted in.
+      serviceInstanceID: "1fdf81f3-5d05-4188-9c54-a69f4b3e780d", // The ID of your service instance.
+      onLoad: function(instance) { instance.render(); }
+    };
+  setTimeout(function(){
+    const t=document.createElement('script');
+    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js";
+    document.head.appendChild(t);
+  });
+</script>
+</body>
+<script src="Action.js"></script>
+</html>

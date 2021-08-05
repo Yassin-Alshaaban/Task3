@@ -1,0 +1,592 @@
+{
+  "intents": [
+    {
+      "intent": "covid",
+      "examples": [
+        {
+          "text": "cov"
+        },
+        {
+          "text": "covid"
+        },
+        {
+          "text": "أشعر بأعراض كورونا"
+        },
+        {
+          "text": "أشعر بالمرض"
+        },
+        {
+          "text": "أعاني من حرارة"
+        },
+        {
+          "text": "ارتفاع حرارة"
+        },
+        {
+          "text": "اعراض كورونا"
+        },
+        {
+          "text": "حرارة"
+        },
+        {
+          "text": "غثيان"
+        },
+        {
+          "text": "مخالط"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "other",
+      "examples": [
+        {
+          "text": "الموقع الرسمي لمنظمة الصحة العالمية"
+        }
+      ],
+      "description": "الموقع الرسمي لمنظمة الصحة العالمية"
+    },
+    {
+      "intent": "ترحيب",
+      "examples": [
+        {
+          "text": "hello"
+        },
+        {
+          "text": "احتاج مساعدة"
+        },
+        {
+          "text": "السلام عليكم"
+        },
+        {
+          "text": "اهلا"
+        },
+        {
+          "text": "سلام"
+        },
+        {
+          "text": "كيف الحال"
+        },
+        {
+          "text": "كيف حالك"
+        },
+        {
+          "text": "مرحبا"
+        },
+        {
+          "text": "هلا"
+        },
+        {
+          "text": "هيلو"
+        }
+      ],
+      "description": "سلام"
+    },
+    {
+      "intent": "حجوزات",
+      "examples": [
+        {
+          "text": "الأحد"
+        },
+        {
+          "text": "حجز"
+        },
+        {
+          "text": "كيف احجز"
+        },
+        {
+          "text": "هل عندكم حجز"
+        },
+        {
+          "text": "هل عندكم حوزات"
+        },
+        {
+          "text": "هل لديكم حجز"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "sys-date",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-number",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-time",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "شكوك",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "أشك",
+          "synonyms": [
+            "اشك",
+            "شك"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "اعتقد",
+          "synonyms": [
+            "أعتقد"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "ربما",
+          "synonyms": [
+            "لا ادري"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "غالباً",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "لا أدري",
+          "synonyms": [
+            "لا ادري"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "محتمل",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "من الممكن",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "لا",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "no",
+          "synonyms": [
+            "No",
+            "لا",
+            "مافي"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "نعم",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "نعم",
+          "synonyms": [
+            "ok",
+            "أكيد",
+            "اجل",
+            "بالطبع",
+            "يب",
+            "يس"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    },
+    "from-sample": true
+  },
+  "webhooks": [
+    {
+      "url": "https://www.who.int/ar",
+      "name": "main_webhook",
+      "headers": []
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_10_1628131895780",
+      "context": {
+        "time": "@sys-time"
+      },
+      "conditions": "@sys-time",
+      "event_name": "input",
+      "dialog_node": "handler_1_1628131895781"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "عدد المرافقين"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_9_1628131952641",
+      "event_name": "focus",
+      "dialog_node": "handler_2_1628131952642",
+      "previous_sibling": "handler_3_1628131952642"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_9_1628131952641",
+      "context": {
+        "number": "@sys-number"
+      },
+      "conditions": "@sys-number",
+      "event_name": "input",
+      "dialog_node": "handler_3_1628131952642"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_7_1628131865389",
+      "context": {
+        "date": "@sys-date"
+      },
+      "conditions": "@sys-date",
+      "event_name": "input",
+      "dialog_node": "handler_5_1628131865391"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "اختر التوقيت"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_10_1628131895780",
+      "event_name": "focus",
+      "dialog_node": "handler_5_1628131895781",
+      "previous_sibling": "handler_1_1628131895781"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "ما اليوم المناسب"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_7_1628131865389",
+      "event_name": "focus",
+      "dialog_node": "handler_7_1628131865391",
+      "previous_sibling": "handler_5_1628131865391"
+    },
+    {
+      "type": "frame",
+      "title": "حجز موعد",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "تم تأكيد الحجز"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#حجوزات",
+      "dialog_node": "node_1_1628129858643",
+      "previous_sibling": "node_3_1628132762687"
+    },
+    {
+      "type": "standard",
+      "title": "ترحيب",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "ياهلا "
+              },
+              {
+                "text": "إسألني"
+              },
+              {
+                "text": "هلا وغلا،تفضل"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "conditions": "#ترحيب",
+      "dialog_node": "node_2_1627832885883",
+      "previous_sibling": "مرحبا"
+    },
+    {
+      "type": "standard",
+      "title": "اعراض كورونا",
+      "output": {
+        "generic": [
+          {
+            "title": "هل تشعر  بأعراض كورونا؟",
+            "options": [
+              {
+                "label": "نعم",
+                "value": {
+                  "input": {
+                    "text": "@نعم"
+                  }
+                }
+              },
+              {
+                "label": "لا",
+                "value": {
+                  "input": {
+                    "text": "@لا"
+                  }
+                }
+              },
+              {
+                "label": "ربما",
+                "value": {
+                  "input": {
+                    "text": "@شكوك"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "conditions": "#covid",
+      "dialog_node": "node_3_1628132762687",
+      "previous_sibling": "node_2_1627832885883"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": " إذا كنت قد خالطت شخص مصاب خلال ال15 يوم الماضية أو تشعر بأعراض الحمّى  ننصحك بشدة  لحجز موعد لفحصك والتأكد من سلامتك"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1628132762687",
+      "conditions": "@شكوك",
+      "dialog_node": "node_5_1628135478835"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "قد تتشابه أعراض كورونا مع العديد من الامراض الأخرى لذك من الأفضل القيام بفحص للتاكد"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1628132762687",
+      "conditions": "@لا",
+      "dialog_node": "node_6_1628136253259",
+      "previous_sibling": "node_8_1628135635453"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": " يبدو الوضع خطير لكن ننصحك أولا بعمل بفحص كورونا  للتأكد من حالتك"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1628132762687",
+      "conditions": "@نعم",
+      "dialog_node": "node_8_1628135635453",
+      "previous_sibling": "node_5_1628135478835"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            ""
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "أي شيء آخر",
+      "conditions": "$webhook_result_1",
+      "dialog_node": "response_10_1628138494276",
+      "previous_sibling": "response_7_1628138493566"
+    },
+    {
+      "type": "response_condition",
+      "parent": "أي شيء آخر",
+      "conditions": "anything_else",
+      "dialog_node": "response_2_1628138494619",
+      "previous_sibling": "response_10_1628138494276"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "لم أفهم، يمكنك محاولة اعادة الصياغة"
+              },
+              {
+                "text": "هل يمكنك اعادة صياغة عبارتك؟ أنا لا فهم"
+              },
+              {
+                "text": "لم أفهم قصدك"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "أي شيء آخر",
+      "conditions": "#other",
+      "dialog_node": "response_7_1628138493566"
+    },
+    {
+      "type": "slot",
+      "parent": "node_1_1628129858643",
+      "variable": "$time",
+      "dialog_node": "slot_10_1628131895780",
+      "previous_sibling": "slot_7_1628131865389"
+    },
+    {
+      "type": "slot",
+      "parent": "node_1_1628129858643",
+      "variable": "$date",
+      "dialog_node": "slot_7_1628131865389"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_1_1628129858643",
+      "variable": "$number",
+      "dialog_node": "slot_9_1628131952641",
+      "previous_sibling": "slot_10_1628131895780"
+    },
+    {
+      "type": "standard",
+      "title": "الموقع الرسمي لمنظمة الصحة العالمية",
+      "actions": [
+        {
+          "name": "main_webhook",
+          "type": "webhook",
+          "parameters": {
+            "21": ""
+          },
+          "result_variable": "webhook_result_1"
+        }
+      ],
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#other",
+      "dialog_node": "أي شيء آخر",
+      "previous_sibling": "node_1_1628129858643",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "مرحبا",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "ياهلا، كيف اقدر اساعدك؟"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "مرحبا"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": ":هل قصدت",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "كل ما سبق خطأ"
+    },
+    "human_agent_assist": {
+      "prompt": ":هل قصدت"
+    }
+  },
+  "learning_opt_out": false,
+  "name": "محادثة",
+  "language": "ar",
+  "description": ""
+}
